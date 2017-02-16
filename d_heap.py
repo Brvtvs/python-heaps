@@ -8,6 +8,24 @@ import unittest
 # A d-ary heap is a binary heap, but with an arbitrary branching factor.
 class DHeap:
 
+    def __init__(self, initial_contents=(), max_heap=True, branching_factor=2):
+        """
+        Class constructor. Completes in O(n log n) time.
+        :param initial_contents: The contents to initially store in the heap. Copies the given values and does not edit
+        the passed in list.
+        :param max_heap: True to create a max heap, else False to create a min heap.
+        :param branching_factor: The maximum number of children each parent in the tree should have. Defaults to 2 for
+
+        """
+        self.branching_factor = branching_factor
+        self.max_heap = max_heap
+        self.heap_array = []
+        self.last_index = -1
+
+        # Pushes each initializing value into the heap.
+        for val in initial_contents:
+            self.push(val)
+
     @staticmethod
     def heapify(unordered_list, max_heap=True, branching_factor=2):
         """
@@ -36,7 +54,8 @@ class DHeap:
     @staticmethod
     def heapsort(unordered_list, ascending=True):
         """
-        Uses binary heap logic in order to sort a given list in place. Takes an average of O(n log n) time.
+        Uses binary heap logic in order to sort a given list in place. Takes O(n log n) time to complete, even in the
+        worst case.
         :param unordered_list: The list to order in place.
         :param ascending: True to sort into ascending order, else False to order in descending order.
         """
@@ -51,24 +70,6 @@ class DHeap:
 
             # recursively heapifies the new top element downwards until its in its correct position.
             heap.__sift_down(0)
-
-    def __init__(self, initial_contents=(), max_heap=True, branching_factor=2):
-        """
-        Class constructor. Completes in O(n log n) time.
-        :param initial_contents: The contents to initially store in the heap. Copies the given values and does not edit
-        the passed in list.
-        :param max_heap: True to create a max heap, else False to create a min heap.
-        :param branching_factor: The maximum number of children each parent in the tree should have. Defaults to 2 for
-
-        """
-        self.branching_factor = branching_factor
-        self.max_heap = max_heap
-        self.heap_array = []
-        self.last_index = -1
-
-        # Pushes each initializing value into the heap.
-        for val in initial_contents:
-            self.push(val)
 
     def peek(self):
         """
