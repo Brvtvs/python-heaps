@@ -111,6 +111,13 @@ class DHeap:
         # recursively sifts the value up until it finds a valid position in the heap
         self.__sift_up(self.last_index)
 
+    def is_empty(self):
+        """
+        Gets whether this heap is empty. Completes in O(1) time.
+        :return: True if this heap is empty. Else False.
+        """
+        return self.last_index < 0
+
     def __swap(self, index_1, index_2):
         """
         Swaps the contents of two slots of the heap.
@@ -231,6 +238,12 @@ class DHeapTest(unittest.TestCase):
         unordered = [1, 5, 64, 64, 12315, 677, -15, -1002]
         DHeap.heapsort(unordered, True)
         self.assertListEqual(unordered, [-1002, -15, 1, 5, 64, 64, 677, 12315])
+
+    def test_is_empty(self):
+        heap = DHeap()
+        self.assertEqual(heap.is_empty(), True)
+        heap.push(1)
+        self.assertEqual(heap.is_empty(), False)
 
     def test_push(self):
         """Tests pushing values onto a heap."""
